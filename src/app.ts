@@ -143,6 +143,8 @@ export function createApp(db: DatabaseSync, allowedOrigins = DEFAULT_CORS_ORIGIN
     }),
   );
 
+  app.get("/api", (c) => c.json({ service: "Campus Equipment Booking API", baseUrl: "/api" }));
+
   app.get("/api/equipment", (c) => {
     const equipment = db
       .prepare("SELECT id, name, location FROM equipment ORDER BY id")

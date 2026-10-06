@@ -176,6 +176,7 @@ app.use(
 );
 
 app.get("/", (c) => c.json({ service: "Campus Equipment Booking API", baseUrl: "/api" }));
+app.get("/api", (c) => c.json({ service: "Campus Equipment Booking API", baseUrl: "/api" }));
 
 app.get("/api/equipment", async (c) => {
   const { results } = await c.env.DB

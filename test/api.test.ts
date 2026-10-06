@@ -36,6 +36,15 @@ async function createBooking(payload: unknown = booking): Promise<{ id: string }
   return response.json() as Promise<{ id: string }>;
 }
 
+test("returns service info at the API base path with query parameters", async () => {
+  const response = await send("/api?classId=sample&assignmentId=sample&submissionId=sample");
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), {
+    service: "Campus Equipment Booking API",
+    baseUrl: "/api",
+  });
+});
+
 test("lists seeded equipment and returns an empty booking list", async () => {
   const equipmentResponse = await send("/api/equipment");
   assert.equal(equipmentResponse.status, 200);
