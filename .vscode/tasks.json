@@ -1,0 +1,560 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Check Cloudflare Wrangler",
+			"type": "shell",
+			"command": "npx.cmd",
+			"args": [
+				"--yes",
+				"wrangler@4",
+				"--version"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Cloudflare Login",
+			"type": "shell",
+			"command": "npx.cmd",
+			"args": [
+				"--yes",
+				"wrangler@4",
+				"whoami"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Typecheck Worker and Node API",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"typecheck"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
+			"label": "List Cloudflare D1 Databases",
+			"type": "shell",
+			"command": "npx.cmd",
+			"args": [
+				"--yes",
+				"wrangler@4",
+				"d1",
+				"list"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Create Campus Equipment D1",
+			"type": "shell",
+			"command": "npx.cmd",
+			"args": [
+				"--yes",
+				"wrangler@4",
+				"d1",
+				"create",
+				"campus-equipment-bookings"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Apply Campus Equipment D1 Migrations (Remote)",
+			"type": "shell",
+			"command": "npx.cmd",
+			"args": [
+				"--yes",
+				"wrangler@4",
+				"d1",
+				"migrations",
+				"apply",
+				"campus-equipment-bookings",
+				"--remote"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Deploy Campus Equipment Worker",
+			"type": "shell",
+			"command": "npx.cmd",
+			"args": [
+				"--yes",
+				"wrangler@4",
+				"deploy"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Dry-run Campus Equipment Worker",
+			"type": "shell",
+			"command": "npx.cmd",
+			"args": [
+				"--yes",
+				"wrangler@4",
+				"deploy",
+				"--dry-run"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Apply D1 Migration Noninteractive",
+			"type": "shell",
+			"command": "npx.cmd",
+			"args": [
+				"--yes",
+				"wrangler@4",
+				"d1",
+				"migrations",
+				"apply",
+				"campus-equipment-bookings",
+				"--remote",
+				"--yes"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Apply D1 Migration CI",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"set CI=true && npx.cmd --yes wrangler@4 d1 migrations apply campus-equipment-bookings --remote"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Test Deployed Cloudflare API",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"test:cloudflare"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Final API and Worker Checks",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"npm.cmd test && npm.cmd run typecheck && npm.cmd run build && node --check scripts/tester-server.mjs && node --check scripts/smoke-test-cloudflare.mjs"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect GitHub Push State",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"git status --short --branch & git remote -v & git rev-parse --is-inside-work-tree"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Git Installer Availability",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"where.exe winget"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Git for Windows Install Options",
+			"type": "shell",
+			"command": "winget.exe",
+			"args": [
+				"show",
+				"--id",
+				"Git.Git",
+				"--exact"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Winget Prompt Process",
+			"type": "shell",
+			"command": "Get-CimInstance",
+			"args": [
+				"Win32_Process",
+				"-Filter",
+				"Name = 'winget.exe'"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Winget Prompt Process",
+			"type": "shell",
+			"command": "Get-Process",
+			"args": [
+				"-Name",
+				"winget",
+				"-ErrorAction",
+				"SilentlyContinue"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Active Winget Process 2",
+			"type": "shell",
+			"command": "Get-Process",
+			"args": [
+				"-Name",
+				"winget",
+				"-ErrorAction",
+				"SilentlyContinue"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Close Stalled Winget Check",
+			"type": "shell",
+			"command": "Stop-Process",
+			"args": [
+				"-Id",
+				"4448",
+				"-Force"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Show Git for Windows Package",
+			"type": "shell",
+			"command": "winget.exe",
+			"args": [
+				"show",
+				"--id",
+				"Git.Git",
+				"--exact",
+				"--source",
+				"winget"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Install Git for Current User",
+			"type": "shell",
+			"command": "winget.exe",
+			"args": [
+				"install",
+				"--id",
+				"Git.Git",
+				"--exact",
+				"--scope",
+				"user",
+				"--source",
+				"winget",
+				"--accept-source-agreements",
+				"--accept-package-agreements",
+				"--silent"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Locate Installed Git",
+			"type": "shell",
+			"command": "Get-Command",
+			"args": [
+				"git.exe",
+				"-ErrorAction",
+				"SilentlyContinue"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Installed Git Package",
+			"type": "shell",
+			"command": "winget.exe",
+			"args": [
+				"list",
+				"--id",
+				"Git.Git",
+				"--exact",
+				"--source",
+				"winget"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Locate Git Install Registry HKCU",
+			"type": "shell",
+			"command": "reg.exe",
+			"args": [
+				"query",
+				"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Git_is1",
+				"/v",
+				"InstallLocation"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Locate Git Install Registry HKLM",
+			"type": "shell",
+			"command": "reg.exe",
+			"args": [
+				"query",
+				"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Git_is1",
+				"/v",
+				"InstallLocation"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Local Git Repository",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"status",
+				"--short",
+				"--branch"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Git Commit Identity",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"config",
+				"--global",
+				"--get-regexp",
+				"user\\.(name|email)"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Git Identity Presence",
+			"type": "shell",
+			"command": "$git = 'C:\\Program Files\\Git\\cmd\\git.exe'; $name = & $git config --global --get user.name; $email = & $git config --global --get user.email; if ($name) { 'Git author name configured' } else { 'Git author name missing' }; if ($email) { 'Git author email configured' } else { 'Git author email missing' }",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Initialize Local Project Git",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"init",
+				"--initial-branch=main"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Add GitHub Origin and Identity",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"remote",
+				"add",
+				"origin",
+				"https://github.com/Suphanat-6731503039/Midterm-Practical-Lab-Test-Campus-Equipment-Booking-API.git"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Set Repository Commit Author Name",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"config",
+				"user.name",
+				"Suphanat-6731503039"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Set Repository Commit Author Email",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"config",
+				"user.email",
+				"194211715+Suphanat-6731503039@users.noreply.github.com"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Fetch Existing GitHub Main",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"fetch",
+				"origin"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Attach Workspace to Existing Main",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"reset",
+				"--mixed",
+				"origin/main"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Review Local Push Files",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"status",
+				"--short",
+				"--branch",
+				"--untracked-files=all"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect Submission Zip Metadata",
+			"type": "shell",
+			"command": "Get-Item",
+			"args": [
+				".\\Campus-Equipment-Booking-API-Submission.zip"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "List Submission Zip Contents",
+			"type": "shell",
+			"command": "Add-Type",
+			"args": [
+				"-AssemblyName",
+				"System.IO.Compression.FileSystem"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "List Submission Zip Entries",
+			"type": "shell",
+			"command": "tar.exe",
+			"args": [
+				"-tf",
+				"Campus-Equipment-Booking-API-Submission.zip"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Verify Submission Archive Ignored",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"check-ignore",
+				"Campus-Equipment-Booking-API-Submission.zip"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stage Project Source for GitHub",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"add",
+				"-A"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Review Staged Push Files",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"status",
+				"--short"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Review Staged Push Summary",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"diff",
+				"--cached",
+				"--stat"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Staged Patch Whitespace",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"diff",
+				"--cached",
+				"--check"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate Documentation Diff",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"diff",
+				"--check"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Stage Final Git Docs",
+			"type": "shell",
+			"command": "C:\\Program Files\\Git\\cmd\\git.exe",
+			"args": [
+				"add",
+				"-A"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

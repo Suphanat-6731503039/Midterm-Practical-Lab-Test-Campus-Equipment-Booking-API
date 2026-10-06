@@ -1,0 +1,13 @@
+node_modules/
+dist/
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+.wrangler/
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+coverage/
+Campus-Equipment-Booking-API-Submission.zip

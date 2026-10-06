@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "campus-equipment-booking-api",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-06",
+  "workers_dev": true,
+  "vars": {
+    "CORS_ORIGINS": "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173,http://localhost:5500,http://127.0.0.1:5500,http://localhost:8080,http://127.0.0.1:8080"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "campus-equipment-bookings",
+      "database_id": "536931b1-4658-407c-a766-7ef0966dd52a",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
